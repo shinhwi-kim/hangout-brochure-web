@@ -1,0 +1,10 @@
+{
+  "buildCommand": "node build-config.js",
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://BACKEND-HOST/api/:path*"
+    }
+  ]
+}
