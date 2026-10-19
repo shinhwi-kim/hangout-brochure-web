@@ -5,10 +5,9 @@ const fs = require("node:fs");
 
 const config = {
   kakaoJsKey: process.env.KAKAO_JS_KEY || "",
-  // Left empty so the browser calls /api on this same origin, which vercel.json rewrites
-  // to the backend. Same-origin means no CORS configuration on the backend.
-  apiBase: "",
+  // Set BACKEND in Vercel to make the browser call the API directly.
+  apiBase: (process.env.BACKEND || "").replace(/\/+$/, ""),
 };
 
 fs.writeFileSync("config.js", `window.APP_CONFIG = ${JSON.stringify(config)};\n`);
-console.log(`config.js written (kakaoJsKey ${config.kakaoJsKey ? "set" : "MISSING"})`);
+console.log(`config.js written (kakaoJsKey ${config.kakaoJsKey ? "set" : "MISSING"}, BACKEND ${config.apiBase ? "set" : "MISSING"})`);

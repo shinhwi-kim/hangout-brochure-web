@@ -17,6 +17,11 @@ node server.js          # http://localhost:5173
 PORT=3000 BACKEND=http://localhost:9090 node server.js
 ```
 
+Vercel 배포에서는 브라우저가 백엔드에 직접 요청한다. Vercel 프로젝트의 Environment Variables에
+`BACKEND=https://<백엔드-주소>` 와 `KAKAO_JS_KEY=<카카오 JavaScript 키>` 를 설정하고 재배포한다.
+`BACKEND` 는 빌드 때 `config.js` 에 기록되어 브라우저에 공개되므로 비밀값을 넣지 않는다.
+백엔드는 `prod` 프로필로 실행해야 두 Vercel 사이트 origin이 CORS 허용 목록에 적용된다.
+
 서버 설정은 `.env` 에 두고, 카카오 키는 Git에 올라가지 않는 `.env.local` 에 둔다.
 두 파일을 자동으로 읽으며, 같은 항목은 `.env.local` 값이 우선한다. 셸 환경변수는 두 파일보다 우선한다.
 `.env.local` 파일을 만들고 카카오 키를 설정한다:
