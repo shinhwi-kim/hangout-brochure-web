@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hangout Brochure</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__mark"></span>
+      <span class="brand__name">Hangout Brochure</span>
+    </div>
+
+    <div class="filters">
+      <div class="field">
+        <label for="from">행사 시작</label>
+        <input type="date" id="from" />
+      </div>
+      <div class="field">
+        <label for="to">행사 끝</label>
+        <input type="date" id="to" />
+      </div>
+
+      <div class="field field--category">
+        <label>카테고리</label>
+        <button type="button" class="dropdown-toggle" id="categoryToggle" aria-expanded="false">
+          <span id="categoryLabel">전체</span>
+          <span class="caret"></span>
+        </button>
+        <div class="dropdown" id="categoryDropdown" hidden>
+          <div class="dropdown__actions">
+            <button type="button" data-select-all>전체 선택</button>
+            <button type="button" data-clear-all>전체 해제</button>
+          </div>
+          <div class="dropdown__list" id="categoryList"></div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn--primary" id="searchBtn">검색</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="map-pane">
+      <div id="map"></div>
+
+      <div class="legend" id="legend">
+        <button type="button" class="legend__item is-on" data-status="ending">
+          <span class="dot dot--ending"></span>곧 종료 <b data-count="ending">0</b>
+        </button>
+        <button type="button" class="legend__item is-on" data-status="ongoing">
+          <span class="dot dot--ongoing"></span>진행중 <b data-count="ongoing">0</b>
+        </button>
+        <button type="button" class="legend__item is-on" data-status="upcoming">
+          <span class="dot dot--upcoming"></span>곧 시작 <b data-count="upcoming">0</b>
+        </button>
+        <button type="button" class="legend__item" data-status="ended">
+          <span class="dot dot--ended"></span>종료됨 <b data-count="ended">0</b>
+        </button>
+      </div>
+
+      <div class="map-loading" id="mapLoading" hidden><span class="spinner"></span>불러오는 중…</div>
+    </section>
+
+    <aside class="side-pane">
+      <div class="side-head">
+        <div>
+          <h2 class="side-title">표시 중인 행사</h2>
+          <p class="side-sub" id="listSummary">—</p>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="onlyInView" checked />
+          <span>지도 영역만</span>
+        </label>
+      </div>
+      <div class="side-list" id="list"></div>
+    </aside>
+  </main>
+</div>
+
+<div class="key-gate" id="keyGate" hidden>
+  <div class="key-card">
+    <h2>카카오맵 JavaScript 키가 필요해요</h2>
+    <p>
+      <a href="https://developers.kakao.com/console/app" target="_blank" rel="noreferrer">Kakao Developers</a>
+      앱의 <b>JavaScript 키</b>를 입력하세요. 플랫폼 &gt; Web 사이트 도메인에
+      <code id="originHint"></code> 를 등록해야 지도가 뜹니다.
+    </p>
+    <input type="text" id="keyInput" placeholder="JavaScript 앱 키 (32자)" autocomplete="off" />
+    <button type="button" class="btn btn--primary" id="keySave">저장하고 시작</button>
+    <small>입력한 키는 이 브라우저(localStorage)에만 저장됩니다. <code>config.js</code> 에 넣어두면 이 창은 안 떠요.</small>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
